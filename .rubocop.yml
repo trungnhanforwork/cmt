@@ -1,0 +1,154 @@
+# @see https://docs.google.com/spreadsheets/d/1gOXRk-IsNY1-ZMUYQ_H_-CfegBHzoZBCsRS-dfven08/edit#gid=1662326043
+require: rubocop-rails
+
+# Common configuration.
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  Exclude:
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'spec/spec_helper.rb'
+    - 'db/data_schema.rb'
+    - 'bin/bundle'
+    - 'bin/yarn'
+    - 'db/schema.rb'
+
+Style/WordArray:
+  Enabled: true
+
+Style/NumericLiterals:
+  Enabled: true
+  Exclude:
+    - 'db/schema.rb'
+
+Layout/LineLength:
+  Enabled: true
+  AllowedPatterns: ['\A#']
+  Exclude:
+    - 'config/initializers/*.rb'
+    - 'app/views/admin/*/*.arb'
+
+Lint/BooleanSymbol:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/*'
+
+Lint/LiteralAsCondition:
+  Enabled: true
+  Exclude:
+    - 'app/admin/variant_gifts.rb'
+
+Lint/UselessAssignment:
+  Enabled: true
+  Exclude:
+    - 'app/services/data_import_services/import_inventory_policies.rb'
+
+Naming/AccessorMethodName:
+  Enabled: true
+  Exclude:
+    - 'app/controllers/m_admin/sap_billings_controller.rb'
+    - 'app/graphql/types/query_type.rb'
+
+Naming/FileName:
+  Enabled: true
+  Exclude:
+    - 'lib/tasks/level-campaign.rake'
+    - 'config/initializers/set-trusted-proxies.rb'
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: true
+  Exclude:
+    - 'app/controllers/api/base_controller.rb'
+
+Rails/NotNullColumn:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/20210531094311_add_price_to_variants.rb'
+    - 'db/migrate/20210531094311_add_price_to_variants.rb'
+    - 'db/migrate/20210616082200_add_fields_to_prices.rb'
+    - 'db/migrate/20210616082200_add_fields_to_prices.rb'
+    - 'db/migrate/20210616082200_add_fields_to_prices.rb'
+    - 'db/migrate/20210923134857_add_import_file_id_to_import_rows.rb'
+    - 'db/migrate/20220920022606_add_reference_to_serve_customer.rb'
+    - 'db/migrate/20220928072238_add_variant_reference_to_quotation_item.rb'
+    - 'db/migrate/20230427071216_add_fields_to_lucky_wheel_prize.rb'
+    - 'db/migrate/20230427071216_add_fields_to_lucky_wheel_prize.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/ReversibleMigration:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/TimeZone:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Enabled: false
+
+Security/Eval:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
