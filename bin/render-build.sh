@@ -8,4 +8,8 @@ bundle install
 # perform database migrations in the build command.
 # Uncomment the following line:
 
+# Run migrations for all databases
 bundle exec rails db:migrate
+bundle exec rails db:migrate:cache
+bundle exec rails db:migrate:queue
+bundle exec rails db:migrate:cable
