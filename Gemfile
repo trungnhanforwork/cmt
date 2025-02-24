@@ -30,11 +30,11 @@ gem 'kamal', require: false
 gem 'thruster', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem 'image_processing', '~> 1.2'
-gem 'jwt'
 gem 'cancancan', '~> 3.0'
 gem 'devise', '~> 4.9'
 gem 'devise-jwt', '~> 0.12.1'
+gem 'image_processing', '~> 1.2'
+gem 'jwt'
 
 gem 'rack-cors'
 gem 'ransack', '~> 4.1'
