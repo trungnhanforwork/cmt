@@ -1,5 +1,7 @@
 class SubgroupSerializer < ActiveModel::Serializer
-  attributes :id, :code, :name, :description, :created_at, :updated_at
+  attributes :id, :code, :name, :product_group_code
 
-  has_many :product_groups, serializer: ProductGroupSerializer
+  def product_group_code
+    object.product_group.code if object.product_group.present?
+  end
 end

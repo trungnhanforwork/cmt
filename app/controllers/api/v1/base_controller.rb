@@ -29,7 +29,7 @@ module Api
         token = request.headers['Authorization']&.split&.last
         return if token.blank?
 
-        payload = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256').first
+        payload = JWT.decode(token, Rails.application.credentials.secret_key_base, true, algorithm: 'HS256').first
         User.find_by(id: payload['user_id'])
       rescue JWT::DecodeError
         nil
