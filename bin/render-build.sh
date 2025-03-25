@@ -9,8 +9,6 @@ bundle install
 # Uncomment the following line:
 
 # Run migrations for all databases
-bundle exec rails db:drop
-bundle exec rails db:create
 bundle exec rails db:migrate
 bundle exec rails db:migrate:cache
 bundle exec rails db:migrate:queue
