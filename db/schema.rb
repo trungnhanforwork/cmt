@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_16_080917) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_041150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -85,10 +85,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_080917) do
     t.string "name"
     t.string "description"
     t.string "code", null: false
-    t.bigint "subgroup_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subgroup_id"], name: "index_product_groups_on_subgroup_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -107,7 +105,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_080917) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_group_id", null: false
     t.index ["code"], name: "index_subgroups_on_code", unique: true
+    t.index ["product_group_id"], name: "index_subgroups_on_product_group_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,6 +127,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_080917) do
   add_foreign_key "certificate_subgroups", "subgroups"
   add_foreign_key "certificates", "brands"
   add_foreign_key "certificates", "cert_types"
-  add_foreign_key "product_groups", "subgroups"
   add_foreign_key "sessions", "users"
+  add_foreign_key "subgroups", "product_groups"
 end

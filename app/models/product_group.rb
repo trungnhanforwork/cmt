@@ -6,16 +6,11 @@
 #  name        :string
 #  description :string
 #  code        :string           not null
-#  subgroup_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-# Indexes
-#
-#  index_product_groups_on_subgroup_id  (subgroup_id)
-#
 
 class ProductGroup < ApplicationRecord
-  belongs_to :subgroup
+  has_many :subgroups, dependent: :destroy
   validates :code, presence: true, uniqueness: true
 end
