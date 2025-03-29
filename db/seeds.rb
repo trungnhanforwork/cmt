@@ -103,12 +103,14 @@ data = [
   { code: 'STRIPEX', name: 'Đèn led dây', category: 'LT' }
 ]
 puts '🌱 Seeding admin user...'
-User.create!(
-  email_address: 'admin@example.com',
-  password: 'password123',
-  password_confirmation: 'password123',
-  user_type: :superadmin
-)
+
+User.find_or_create_by(email_address: 'admin@example.com') do |user|
+  user.password = 'password123'
+  user.password_confirmation = 'password123'
+  user.user_type = :superadmin
+end
+
+puts '✅ Seeding admin user completed!'
 
 puts '✅ Seeding admin user completed!'
 
