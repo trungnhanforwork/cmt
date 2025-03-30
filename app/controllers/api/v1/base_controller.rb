@@ -22,7 +22,7 @@ module Api
       end
 
       def json_response(object, status = :ok)
-        render json: object, status: status
+        render json: object, status: status unless performed?
       end
 
       def find_current_user

@@ -16,9 +16,12 @@ module Api
       # POST /certificates
       def create
         @certificate = Certificate.new(certificate_params)
+
         @certificate.products = params[:certificate][:products] if params[:certificate][:products].is_a?(Array)
+
+        @certificate.subgroups = params[:certificate][:subgroups] if params[:certificate][:products].is_a?(Array)
+
         if @certificate.save
-          @certificate.subgroup_ids = params[:certificate][:subgroup_ids] || []
           formatted_response(data: @certificate, status: :created)
         else
           formatted_response(errors: @certificate.errors)
@@ -28,6 +31,14 @@ module Api
       # PATCH/PUT /certificates/1
       def update
         if @certificate.update(certificate_params)
+          if params[:certificate][:products].is_a?(Array)
+            @certificate.update(products: params[:certificate][:products])
+          end
+
+          if params[:certificate][:subgroups].is_a?(Array)
+            @certificate.update(subgroups: params[:certificate][:subgroups])
+          end
+
           formatted_response(data: @certificate)
         else
           formatted_response(errors: @certificate.errors)
@@ -43,7 +54,7 @@ module Api
       private
 
       def certificate_params
-        params.require(:certificate).permit(:cert_number, :cert_date, :brand_id, :cert_type_id, :subgroup_ids, images: [])
+        params.require(:certificate).permit(:cert_number, :cert_date, :brand_id, :cert_type_id, images: [])
       end
     end
   end
