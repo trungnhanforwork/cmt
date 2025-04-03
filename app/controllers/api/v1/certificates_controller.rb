@@ -19,7 +19,7 @@ module Api
 
         @certificate.products = params[:certificate][:products] if params[:certificate][:products].is_a?(Array)
 
-        @certificate.subgroups = params[:certificate][:subgroups] if params[:certificate][:products].is_a?(Array)
+        @certificate.subgroup_ids = params[:certificate][:subgroups] if params[:certificate][:subgroups].is_a?(Array)
 
         if @certificate.save
           formatted_response(data: @certificate, status: :created)
@@ -36,7 +36,7 @@ module Api
           end
 
           if params[:certificate][:subgroups].is_a?(Array)
-            @certificate.update(subgroups: params[:certificate][:subgroups])
+            @certificate.subgroup_ids = params[:certificate][:subgroups]
           end
 
           formatted_response(data: @certificate)

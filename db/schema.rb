@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_29_233641) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_29_234000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,6 +73,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_233641) do
     t.index ["cert_type_id"], name: "index_certificates_on_cert_type_id"
   end
 
+  create_table "certificates_subgroups", id: false, force: :cascade do |t|
+    t.bigint "certificate_id", null: false
+    t.bigint "subgroup_id", null: false
+    t.index ["certificate_id", "subgroup_id"], name: "index_certificates_subgroups_on_certificate_id_and_subgroup_id", unique: true
+    t.index ["certificate_id"], name: "index_certificates_subgroups_on_certificate_id"
+    t.index ["subgroup_id"], name: "index_certificates_subgroups_on_subgroup_id"
+  end
+
   create_table "product_groups", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -117,6 +125,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_29_233641) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "certificates", "brands"
   add_foreign_key "certificates", "cert_types"
+  add_foreign_key "certificates_subgroups", "certificates"
+  add_foreign_key "certificates_subgroups", "subgroups"
   add_foreign_key "sessions", "users"
   add_foreign_key "subgroups", "product_groups"
 end
