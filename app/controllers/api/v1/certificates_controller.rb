@@ -21,6 +21,8 @@ module Api
 
         @certificate.subgroup_ids = params[:certificate][:subgroups] if params[:certificate][:subgroups].is_a?(Array)
 
+        @certificate.images.attach(params[:certificate][:images]) if params[:certificate][:images].present?
+
         if @certificate.save
           formatted_response(data: @certificate, status: :created)
         else
@@ -30,14 +32,17 @@ module Api
 
       # PATCH/PUT /certificates/1
       def update
-        if @certificate.update(certificate_params)
-          if params[:certificate][:products].is_a?(Array)
-            @certificate.update(products: params[:certificate][:products])
-          end
+        if params[:certificate][:cert_type_code].present?
+          cert_type = CertType.find_by(code: params[:certificate][:cert_type_code])
+          params[:certificate][:cert_type_id] = cert_type.id if cert_type.present?
+        end
 
-          if params[:certificate][:subgroups].is_a?(Array)
-            @certificate.subgroup_ids = params[:certificate][:subgroups]
-          end
+        if @certificate.update(certificate_params)
+          @certificate.update(products: params[:certificate][:products]) if params[:certificate][:products].is_a?(Array)
+
+          @certificate.subgroup_ids = params[:certificate][:subgroups] if params[:certificate][:subgroups].is_a?(Array)
+
+          @certificate.images.attach(params[:certificate][:images]) if params[:certificate][:images].present?
 
           formatted_response(data: @certificate)
         else
@@ -54,7 +59,7 @@ module Api
       private
 
       def certificate_params
-        params.require(:certificate).permit(:cert_number, :cert_date, :brand_id, :cert_type_id, images: [])
+        params.require(:certificate).permit(:cert_number, :cert_date, :brand_id, :cert_type_id)
       end
     end
   end

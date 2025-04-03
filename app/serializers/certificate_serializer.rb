@@ -1,5 +1,12 @@
 class CertificateSerializer < ActiveModel::Serializer
-  attributes :id, :cert_type_code, :cert_number, :brand, :products, :subgroups, :cert_date, :created_at, :updated_at
+  include Rails.application.routes.url_helpers
+
+  attributes :id, :cert_type_code, :cert_number, :brand, :products, :subgroups, :cert_date, :created_at, :updated_at,
+             :images
+
+  def images
+    object.images.map { |image| rails_blob_path(image, only_path: true) }
+  end
 
   def cert_type_code
     object.cert_type.code
