@@ -1,6 +1,6 @@
 class CertificateSerializer < ActiveModel::Serializer
-  attributes :id, :cert_type_code, :brand, :products, :subgroups, :cert_date, :created_at, :updated_at
-  
+  attributes :id, :cert_type_code, :cert_number, :brand, :products, :subgroups, :cert_date, :created_at, :updated_at
+
   def cert_type_code
     object.cert_type.code
   end
