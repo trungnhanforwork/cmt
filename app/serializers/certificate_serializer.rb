@@ -16,4 +16,14 @@ class CertificateSerializer < ActiveModel::Serializer
     value = object.read_attribute(:products)
     value.is_a?(String) ? JSON.parse(value) : value
   end
+
+  def subgroups
+    object.subgroups.map do |subgroup|
+      {
+        id: subgroup.id,
+        name: subgroup.name,
+        code: subgroup.code
+      }
+    end
+  end
 end
