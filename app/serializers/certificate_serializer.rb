@@ -29,7 +29,8 @@ class CertificateSerializer < ActiveModel::Serializer
       {
         id: subgroup.id,
         name: subgroup.name,
-        code: subgroup.code
+        code: subgroup.code,
+        product_group: subgroup.product_group
       }
     end
   end
